@@ -2,16 +2,48 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ShoppingBag, TruckIcon, Shield, Star, Zap } from "lucide-react";
+import { ArrowRight, ShoppingBag, TruckIcon, Shield, Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import heroImage from "@/assets/hero-collection.jpg";
 import collectionImage from "@/assets/collection-showcase.jpg";
+import bannerShirts from "@/assets/banner-shirts.jpg";
+import bannerHoodies from "@/assets/banner-hoodies.jpg";
+import bannerJeans from "@/assets/banner-jeans.jpg";
+import bannerTshirts from "@/assets/banner-tshirts.jpg";
 
 const Index = () => {
-  const categories = [
-    { name: "Shirts", count: "8+ styles", image: "🎯" },
-    { name: "Hoodies", count: "Premium", image: "🔥" },
-    { name: "Jeans", count: "Comfort Fit", image: "⚡" },
-    { name: "T-Shirts", count: "Graphic Tees", image: "✨" },
+  const categoryBanners = [
+    { 
+      name: "Premium Shirts", 
+      description: "Discover our collection of premium shirts", 
+      image: bannerShirts,
+      link: "/products"
+    },
+    { 
+      name: "Cozy Hoodies", 
+      description: "Stay warm in style with our hoodies", 
+      image: bannerHoodies,
+      link: "/products"
+    },
+    { 
+      name: "Comfort Jeans", 
+      description: "Perfect fit jeans for every occasion", 
+      image: bannerJeans,
+      link: "/products"
+    },
+    { 
+      name: "Graphic Tees", 
+      description: "Express yourself with bold designs", 
+      image: bannerTshirts,
+      link: "/products"
+    },
   ];
 
   const features = [
@@ -86,7 +118,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
+      {/* Category Carousel Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -97,23 +129,123 @@ const Index = () => {
               Find your perfect style across our curated collections
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <Link key={index} to="/products">
-                <Card className="group cursor-pointer border-border shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
-                  <div className="p-8 text-center">
-                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {category.image}
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent>
+              {categoryBanners.map((banner, index) => (
+                <CarouselItem key={index}>
+                  <Link to={banner.link}>
+                    <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden group cursor-pointer border border-border shadow-card hover:shadow-card-hover transition-all duration-300">
+                      <img 
+                        src={banner.image} 
+                        alt={banner.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                        <h3 className="text-4xl lg:text-5xl font-bold text-white mb-3">
+                          {banner.name}
+                        </h3>
+                        <p className="text-lg text-white/90 mb-6">
+                          {banner.description}
+                        </p>
+                        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                          Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
-                      {category.name}
-                    </h3>
-                    <p className="text-muted-foreground text-sm">{category.count}</p>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+        </div>
+      </section>
+
+      {/* Trending Products Section */}
+      <section className="py-20 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Trending Now
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Check out what's hot this season
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((item) => (
+              <Card key={item} className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300">
+                <div className="aspect-square bg-secondary/50 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 group-hover:scale-110 transition-transform duration-500" />
+                  <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
+                    New
+                  </Badge>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                    Product Name
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4">Premium Quality</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-accent">$49.99</span>
+                    <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                      Add to Cart
+                    </Button>
                   </div>
-                </Card>
-              </Link>
+                </div>
+              </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Special Offer Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <Card className="relative overflow-hidden border-border shadow-card-hover">
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-primary/10" />
+            <div className="relative grid lg:grid-cols-2 gap-8 p-8 lg:p-12">
+              <div className="flex flex-col justify-center">
+                <Badge className="mb-4 bg-accent/10 text-accent border-accent/20 w-fit">
+                  Limited Time Offer
+                </Badge>
+                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Get 30% Off
+                </h2>
+                <p className="text-muted-foreground text-lg mb-6">
+                  On your first order. Use code: WELCOME30
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                    Shop Now
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-border hover:bg-secondary">
+                    Learn More
+                  </Button>
+                </div>
+              </div>
+              <div className="flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-8xl font-bold text-accent mb-2">30%</div>
+                  <div className="text-2xl font-semibold text-foreground">OFF</div>
+                  <div className="text-muted-foreground mt-2">First Purchase</div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
