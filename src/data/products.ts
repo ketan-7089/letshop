@@ -1,3 +1,22 @@
+// Import local product images
+import a0 from "./product/a0.jpg";
+import a1 from "./product/a1.webp";
+import a2 from "./product/a2.webp";
+import a3 from "./product/a3.webp";
+import a4 from "./product/a4.jpg";
+import a5 from "./product/a5.webp";
+import a6 from "./product/a6.webp";
+import a7 from "./product/a7.webp";
+import a8 from "./product/a8.webp";
+import f1 from "./product/f1.jpg";
+import f2 from "./product/f2.jpg";
+import f3 from "./product/f3.jpg";
+import f4 from "./product/f4.jpg";
+import n1 from "./product/n1.jpg";
+import n2 from "./product/n2.jpg";
+import n3 from "./product/n3.jpg";
+import n4 from "./product/n4.jpg";
+
 export interface Product {
   id: number;
   name: string;
@@ -13,179 +32,171 @@ export const products: Product[] = [
   // Shirts
   {
     id: 1,
-    name: "Classic Oxford Shirt",
+    name: "Casual Shirt",
     category: "Shirts",
-    price: 49.99,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500",
-    description: "Premium cotton oxford shirt with modern fit",
+    price: 899,
+    image: a0,
+    description: "Comfortable cotton casual shirt perfect for everyday wear.",
     rating: 4.5,
     reviews: 128
   },
   {
     id: 2,
-    name: "Linen Summer Shirt",
+    name: "Formal Shirt",
     category: "Shirts",
-    price: 54.99,
-    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500",
-    description: "Breathable linen shirt perfect for warm weather",
+    price: 1299,
+    image: a1,
+    description: "Perfect formal shirt for office and professional events.",
     rating: 4.7,
     reviews: 95
   },
   {
     id: 3,
-    name: "Striped Casual Shirt",
-    category: "Shirts",
-    price: 44.99,
-    image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=500",
-    description: "Classic striped pattern with comfortable fit",
+    name: "Blue Jeans",
+    category: "Jeans",
+    price: 1499,
+    image: a2,
+    description: "Stretchable and comfortable denim jeans.",
     rating: 4.3,
     reviews: 76
   },
-  
-  // Hoodies
   {
     id: 4,
-    name: "Premium Pullover Hoodie",
-    category: "Hoodies",
-    price: 69.99,
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500",
-    description: "Soft fleece hoodie with kangaroo pocket",
+    name: "T-Shirt",
+    category: "T-Shirts",
+    price: 499,
+    image: a3,
+    description: "Soft cotton T-shirt for daily wear.",
     rating: 4.8,
     reviews: 203
   },
   {
     id: 5,
-    name: "Zip-Up Sport Hoodie",
-    category: "Hoodies",
-    price: 74.99,
-    image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500",
-    description: "Athletic fit hoodie with full zipper",
+    name: "Winter Jacket",
+    category: "Jackets",
+    price: 1999,
+    image: a4,
+    description: "Warm and stylish winter jacket.",
     rating: 4.6,
     reviews: 154
   },
   {
     id: 6,
-    name: "Oversized Comfort Hoodie",
-    category: "Hoodies",
-    price: 64.99,
-    image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500",
-    description: "Relaxed fit hoodie for ultimate comfort",
+    name: "Designer Shirt",
+    category: "Shirts",
+    price: 1599,
+    image: a5,
+    description: "Premium designer shirt with elegant patterns.",
     rating: 4.9,
     reviews: 287
   },
-  
-  // Jeans
   {
     id: 7,
-    name: "Slim Fit Dark Jeans",
+    name: "Slim Fit Jeans",
     category: "Jeans",
-    price: 79.99,
-    image: "https://images.unsplash.com/photo-1542272454315-7ad2b2ecb5e3?w=500",
-    description: "Classic dark wash slim fit jeans",
+    price: 1299,
+    image: a6,
+    description: "Modern slim fit jeans for a stylish look.",
     rating: 4.4,
     reviews: 167
   },
   {
     id: 8,
-    name: "Relaxed Comfort Jeans",
-    category: "Jeans",
-    price: 84.99,
-    image: "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=500",
-    description: "Comfortable relaxed fit with stretch",
+    name: "Graphic T-Shirt",
+    category: "T-Shirts",
+    price: 599,
+    image: a7,
+    description: "Trendy graphic print T-shirt.",
     rating: 4.6,
     reviews: 142
   },
   {
     id: 9,
-    name: "Distressed Denim",
-    category: "Jeans",
-    price: 89.99,
-    image: "https://images.unsplash.com/photo-1548883354-48d1da39c3c4?w=500",
-    description: "Modern distressed style jeans",
+    name: "Denim Jacket",
+    category: "Jackets",
+    price: 2199,
+    image: a8,
+    description: "Classic denim jacket for all seasons.",
     rating: 4.5,
     reviews: 98
   },
-  
-  // T-Shirts
   {
     id: 10,
-    name: "Graphic Print Tee",
-    category: "T-Shirts",
-    price: 29.99,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500",
-    description: "Bold graphic design on premium cotton",
+    name: "Party Wear Shirt",
+    category: "Shirts",
+    price: 1799,
+    image: f1,
+    description: "Stylish party wear shirt with unique design.",
     rating: 4.7,
     reviews: 312
   },
   {
     id: 11,
-    name: "Essential Plain Tee",
-    category: "T-Shirts",
-    price: 24.99,
-    image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500",
-    description: "Classic crew neck t-shirt",
+    name: "Cotton Shirt",
+    category: "Shirts",
+    price: 999,
+    image: f2,
+    description: "100% cotton breathable shirt.",
     rating: 4.5,
     reviews: 445
   },
   {
     id: 12,
-    name: "Vintage Logo Tee",
-    category: "T-Shirts",
-    price: 34.99,
-    image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=500",
-    description: "Retro-inspired logo t-shirt",
+    name: "Black Jeans",
+    category: "Jeans",
+    price: 1399,
+    image: f3,
+    description: "Classic black jeans for any occasion.",
     rating: 4.6,
     reviews: 189
   },
   {
     id: 13,
-    name: "Striped Ringer Tee",
+    name: "Polo T-Shirt",
     category: "T-Shirts",
-    price: 32.99,
-    image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500",
-    description: "Classic ringer style with contrast trim",
+    price: 799,
+    image: f4,
+    description: "Smart casual polo T-shirt.",
     rating: 4.4,
     reviews: 127
   },
   {
     id: 14,
-    name: "Pocket Detail Tee",
-    category: "T-Shirts",
-    price: 27.99,
-    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500",
-    description: "Casual tee with chest pocket",
+    name: "Casual Wear",
+    category: "Shirts",
+    price: 1099,
+    image: n1,
+    description: "Comfortable casual wear for weekend outings.",
     rating: 4.3,
     reviews: 156
   },
-  
-  // Additional items
   {
     id: 15,
-    name: "Henley Long Sleeve",
+    name: "Summer Shirt",
     category: "Shirts",
-    price: 39.99,
-    image: "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500",
-    description: "Classic henley with button placket",
+    price: 849,
+    image: n2,
+    description: "Light and breezy summer shirt.",
     rating: 4.6,
     reviews: 103
   },
   {
     id: 16,
-    name: "Sherpa Lined Hoodie",
-    category: "Hoodies",
-    price: 94.99,
-    image: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500",
-    description: "Extra warm sherpa-lined hoodie",
+    name: "Ripped Jeans",
+    category: "Jeans",
+    price: 1599,
+    image: n3,
+    description: "Trendy ripped jeans for a modern look.",
     rating: 4.9,
     reviews: 234
   },
   {
     id: 17,
-    name: "Cargo Utility Jeans",
-    category: "Jeans",
-    price: 92.99,
-    image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500",
-    description: "Functional cargo style denim",
+    name: "V-Neck T-Shirt",
+    category: "T-Shirts",
+    price: 549,
+    image: n4,
+    description: "Classic V-neck T-shirt in premium fabric.",
     rating: 4.4,
     reviews: 87
   }

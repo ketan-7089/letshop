@@ -1,11 +1,18 @@
-import { useParams, Link } from "react-router-dom";
-import { products } from "@/data/products";
-import { useCart } from "@/context/CartContext";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Star, ShoppingCart, ArrowLeft, Truck, Shield, RefreshCw } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { products } from "@/data/products";
+import {
+  ArrowLeft,
+  RefreshCw,
+  Shield,
+  ShoppingCart,
+  Star,
+  Truck,
+} from "lucide-react";
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -18,8 +25,13 @@ const ProductDetails = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Product not found</h2>
-          <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
+            Product not found
+          </h2>
+          <Button
+            asChild
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
+          >
             <Link to="/products">Back to Products</Link>
           </Button>
         </div>
@@ -54,12 +66,17 @@ const ProductDetails = () => {
         {/* Product Details */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Image */}
-          <div className="rounded-2xl overflow-hidden border border-border shadow-card">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-auto object-cover"
-            />
+          <div
+            className="rounded-2xl border border-border shadow-card bg-secondary/20 flex items-center justify-center"
+            style={{ minHeight: "500px" }}
+          >
+            <div className="w-full h-full flex items-center justify-center p-12">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="max-w-full max-h-[500px] w-auto h-auto object-contain"
+              />
+            </div>
           </div>
 
           {/* Info */}
@@ -85,13 +102,21 @@ const ProductDetails = () => {
                   />
                 ))}
               </div>
-              <span className="text-foreground font-medium">{product.rating}</span>
-              <span className="text-muted-foreground">({product.reviews} reviews)</span>
+              <span className="text-foreground font-medium">
+                {product.rating}
+              </span>
+              <span className="text-muted-foreground">
+                ({product.reviews} reviews)
+              </span>
             </div>
 
-            <p className="text-3xl font-bold text-accent mb-6">${product.price}</p>
+            <p className="text-3xl font-bold text-accent mb-6">
+              ₹{product.price}
+            </p>
 
-            <p className="text-muted-foreground text-lg mb-8">{product.description}</p>
+            <p className="text-muted-foreground text-lg mb-8">
+              {product.description}
+            </p>
 
             {/* Quantity Selector */}
             <div className="flex items-center gap-4 mb-8">
@@ -147,23 +172,30 @@ const ProductDetails = () => {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 className="text-3xl font-bold text-foreground mb-8">Related Products</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-8">
+              Related Products
+            </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
-                <Link key={relatedProduct.id} to={`/product/${relatedProduct.id}`}>
+                <Link
+                  key={relatedProduct.id}
+                  to={`/product/${relatedProduct.id}`}
+                >
                   <Card className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300">
-                    <div className="aspect-square bg-secondary/20 relative overflow-hidden">
+                    <div className="aspect-square bg-secondary/20 relative overflow-hidden p-4">
                       <img
                         src={relatedProduct.image}
                         alt={relatedProduct.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-4">
                       <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors line-clamp-1">
                         {relatedProduct.name}
                       </h3>
-                      <p className="text-xl font-bold text-accent">${relatedProduct.price}</p>
+                      <p className="text-xl font-bold text-accent">
+                        ₹{relatedProduct.price}
+                      </p>
                     </div>
                   </Card>
                 </Link>

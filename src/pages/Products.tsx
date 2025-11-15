@@ -1,12 +1,7 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { products } from "@/data/products";
-import { useCart } from "@/context/CartContext";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Search, SlidersHorizontal, Star } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -14,6 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCart } from "@/context/CartContext";
+import { products } from "@/data/products";
+import { Search, SlidersHorizontal, Star } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const { addToCart } = useCart();
@@ -25,9 +25,11 @@ const Products = () => {
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products.filter((product) => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "All" || product.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
 
@@ -78,9 +80,15 @@ const Products = () => {
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
+                  variant={
+                    selectedCategory === category ? "default" : "outline"
+                  }
                   onClick={() => setSelectedCategory(category)}
-                  className={selectedCategory === category ? "bg-accent text-accent-foreground" : ""}
+                  className={
+                    selectedCategory === category
+                      ? "bg-accent text-accent-foreground"
+                      : ""
+                  }
                 >
                   {category}
                 </Button>
@@ -105,7 +113,8 @@ const Products = () => {
           {/* Results Count */}
           <div className="mt-4">
             <p className="text-sm text-muted-foreground">
-              Showing {filteredAndSortedProducts.length} of {products.length} products
+              Showing {filteredAndSortedProducts.length} of {products.length}{" "}
+              products
               {searchQuery && ` for "${searchQuery}"`}
             </p>
           </div>
@@ -118,16 +127,16 @@ const Products = () => {
           {filteredAndSortedProducts.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredAndSortedProducts.map((product) => (
-                <Card 
-                  key={product.id} 
+                <Card
+                  key={product.id}
                   className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300"
                 >
                   <Link to={`/product/${product.id}`}>
-                    <div className="aspect-square bg-secondary/20 relative overflow-hidden">
+                    <div className="aspect-square bg-secondary/20 relative overflow-hidden p-4">
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       />
                       <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
                         {product.category}
@@ -143,7 +152,7 @@ const Products = () => {
                         {product.description}
                       </p>
                     </Link>
-                    
+
                     {/* Rating */}
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center">
@@ -159,10 +168,10 @@ const Products = () => {
 
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-accent">
-                        ${product.price}
+                        ₹{product.price}
                       </span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         onClick={() => addToCart(product)}
                         className="bg-accent hover:bg-accent/90 text-accent-foreground"
                       >
@@ -175,7 +184,9 @@ const Products = () => {
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-2xl text-muted-foreground mb-4">No products found</p>
+              <p className="text-2xl text-muted-foreground mb-4">
+                No products found
+              </p>
               <p className="text-muted-foreground">
                 Try adjusting your search or filter criteria
               </p>
