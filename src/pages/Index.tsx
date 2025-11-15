@@ -55,6 +55,54 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Category Carousel Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent>
+              {categoryBanners.map((banner, index) => (
+                <CarouselItem key={index}>
+                  <Link to={banner.link}>
+                    <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden group cursor-pointer border border-border shadow-card hover:shadow-card-hover transition-all duration-300">
+                      <img 
+                        src={banner.image} 
+                        alt={banner.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                        <h3 className="text-4xl lg:text-5xl font-bold text-white mb-3">
+                          {banner.name}
+                        </h3>
+                        <p className="text-lg text-white/90 mb-6">
+                          {banner.description}
+                        </p>
+                        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                          Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </div>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[var(--hero-gradient)]" />
@@ -118,61 +166,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Category Carousel Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Shop by Category
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Find your perfect style across our curated collections
-            </p>
-          </div>
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 4000,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent>
-              {categoryBanners.map((banner, index) => (
-                <CarouselItem key={index}>
-                  <Link to={banner.link}>
-                    <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden group cursor-pointer border border-border shadow-card hover:shadow-card-hover transition-all duration-300">
-                      <img 
-                        src={banner.image} 
-                        alt={banner.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-                        <h3 className="text-4xl lg:text-5xl font-bold text-white mb-3">
-                          {banner.name}
-                        </h3>
-                        <p className="text-lg text-white/90 mb-6">
-                          {banner.description}
-                        </p>
-                        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                          Shop Now <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
-                      </div>
-                    </div>
-                  </Link>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
-          </Carousel>
-        </div>
-      </section>
 
       {/* Trending Products Section */}
       <section className="py-20 bg-secondary/30">

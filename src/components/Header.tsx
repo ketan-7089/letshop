@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NavLink } from "@/components/NavLink";
 
 const Header = () => {
   return (
@@ -15,18 +16,21 @@ const Header = () => {
           </Link>
           
           <nav className="flex items-center gap-6">
-            <Link 
+            <NavLink 
               to="/" 
+              end
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeClassName="text-accent font-semibold"
             >
               Home
-            </Link>
-            <Link 
+            </NavLink>
+            <NavLink 
               to="/products" 
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              activeClassName="text-accent font-semibold"
             >
               Products
-            </Link>
+            </NavLink>
             <Button asChild variant="default" size="sm" className="bg-accent hover:bg-accent/90">
               <Link to="/cart">
                 <ShoppingCart className="h-4 w-4 mr-2" />
