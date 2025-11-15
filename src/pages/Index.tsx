@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ShoppingBag, TruckIcon, Shield, Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { products } from "@/data/products";
 import {
   Carousel,
   CarouselContent,
@@ -19,6 +21,7 @@ import bannerJeans from "@/assets/banner-jeans.jpg";
 import bannerTshirts from "@/assets/banner-tshirts.jpg";
 
 const Index = () => {
+  const { addToCart } = useCart();
   const categoryBanners = [
     { 
       name: "Premium Shirts", 
@@ -179,22 +182,34 @@ const Index = () => {
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((item) => (
-              <Card key={item} className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300">
-                <div className="aspect-square bg-secondary/50 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 group-hover:scale-110 transition-transform duration-500" />
-                  <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
-                    New
-                  </Badge>
-                </div>
+            {products.slice(0, 4).map((product) => (
+              <Card key={product.id} className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300">
+                <Link to={`/product/${product.id}`}>
+                  <div className="aspect-square bg-secondary/50 relative overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
+                      New
+                    </Badge>
+                  </div>
+                </Link>
                 <div className="p-6">
-                  <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
-                    Product Name
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4">Premium Quality</p>
+                  <Link to={`/product/${product.id}`}>
+                    <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4">{product.category}</p>
+                  </Link>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-accent">$49.99</span>
-                    <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <span className="text-2xl font-bold text-accent">${product.price}</span>
+                    <Button 
+                      size="sm" 
+                      onClick={() => addToCart(product)}
+                      className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                    >
                       Add to Cart
                     </Button>
                   </div>

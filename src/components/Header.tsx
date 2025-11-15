@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { NavLink } from "@/components/NavLink";
+import { useCart } from "@/context/CartContext";
 
 const Header = () => {
+  const { totalItems } = useCart();
+  
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -31,10 +35,15 @@ const Header = () => {
             >
               Products
             </NavLink>
-            <Button asChild variant="default" size="sm" className="bg-accent hover:bg-accent/90">
+            <Button asChild variant="default" size="sm" className="bg-accent hover:bg-accent/90 relative">
               <Link to="/cart">
                 <ShoppingCart className="h-4 w-4 mr-2" />
                 Cart
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-destructive text-destructive-foreground">
+                    {totalItems}
+                  </Badge>
+                )}
               </Link>
             </Button>
           </nav>
