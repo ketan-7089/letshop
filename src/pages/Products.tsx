@@ -1,5 +1,7 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { products } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,6 +16,7 @@ import {
 } from "@/components/ui/select";
 
 const Products = () => {
+  const { addToCart } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
@@ -117,25 +120,29 @@ const Products = () => {
               {filteredAndSortedProducts.map((product) => (
                 <Card 
                   key={product.id} 
-                  className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300 cursor-pointer"
+                  className="group overflow-hidden border-border shadow-card hover:shadow-card-hover transition-all duration-300"
                 >
-                  <div className="aspect-square bg-secondary/20 relative overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
-                      {product.category}
-                    </Badge>
-                  </div>
+                  <Link to={`/product/${product.id}`}>
+                    <div className="aspect-square bg-secondary/20 relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
+                        {product.category}
+                      </Badge>
+                    </div>
+                  </Link>
                   <div className="p-5">
-                    <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors line-clamp-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
-                      {product.description}
-                    </p>
+                    <Link to={`/product/${product.id}`}>
+                      <h3 className="font-bold text-foreground mb-2 group-hover:text-accent transition-colors line-clamp-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+                    </Link>
                     
                     {/* Rating */}
                     <div className="flex items-center gap-2 mb-3">
@@ -154,7 +161,11 @@ const Products = () => {
                       <span className="text-2xl font-bold text-accent">
                         ${product.price}
                       </span>
-                      <Button size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                      <Button 
+                        size="sm" 
+                        onClick={() => addToCart(product)}
+                        className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                      >
                         Add to Cart
                       </Button>
                     </div>
