@@ -24,7 +24,7 @@ const Products = () => {
   const categories = ["All", "Shirts", "Hoodies", "Jeans", "T-Shirts"];
 
   const filteredAndSortedProducts = useMemo(() => {
-    let filtered = products.filter((product) => {
+    const filtered = products.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase());
