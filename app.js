@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'dist'), { index: false }));
 
 // Home page & SPA route
 app.get('/', (req, res) => {
-  const versionBanner = '<div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:14px 20px;text-align:center;font-family:system-ui,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);"><h1 style="margin:0 0 4px 0;font-size:22px;letter-spacing:-0.5px;">Hello from Jenkins on AWS!</h1><p style="margin:0;font-size:14px;opacity:0.95;">Version 1.0</p></div>';
+  const versionBanner = '<div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:14px 20px;text-align:center;font-family:system-ui,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,0.1);"><h1 style="margin:0 0 4px 0;font-size:22px;letter-spacing:-0.5px;">Hello from Jenkins on AWS!</h1><p style="margin:0;font-size:14px;opacity:0.95;">Version 2.0</p></div>';
 
   const distIndex = path.join(__dirname, 'dist', 'index.html');
   if (fs.existsSync(distIndex)) {
