@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     html = html.replace(/<body[^>]*>/i, (match) => match + '\n' + versionBanner);
     res.send(html);
   } else {
-    res.send('<h1>Hello from Jenkins on AWS!</h1><p>Version 1.0</p>');
+    res.send('<h1>Hello from Jenkins on AWS!</h1><p>Version 2.0</p>');
   }
 });
 
