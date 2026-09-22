@@ -9,20 +9,17 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const { totalItems } = useCart();
   const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem("theme");
-    return (
-      saved === "dark" ||
-      (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    );
+    const saved = localStorage.getItem("theme_mode");
+    return saved === "dark";
   });
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      localStorage.setItem("theme_mode", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      localStorage.setItem("theme_mode", "light");
     }
   }, [isDark]);
 
