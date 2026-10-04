@@ -3,16 +3,37 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
+import 'dotenv/config';
+import productsRouter from './server/routes/products.js';
+import ordersRouter from './server/routes/orders.js';
+import { getDbStatus } from './server/db.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware for parsing JSON request bodies
+app.use(express.json());
+
 // Health check endpoint required by MCA Lab Manual
 app.get('/health', (req, res) => {
   res.json({ status: 'UP' });
 });
+
+// Database & Backend status endpoint
+app.get('/api/status', (req, res) => {
+  res.json({
+    status: 'UP',
+    database: getDbStatus(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Mount REST API routes
+app.use('/api/products', productsRouter);
+app.use('/api/orders', ordersRouter);
 
 // Serve LetShop static assets from dist
 app.use('/assets', express.static(path.join(__dirname, 'dist', 'assets')));

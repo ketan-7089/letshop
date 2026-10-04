@@ -2,10 +2,46 @@ import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return;
+    setIsCheckingOut(true);
+    try {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+          })),
+          total_amount: Number((totalPrice * 1.1).toFixed(2)),
+          customer_name: 'Ketan (Customer)',
+          customer_email: 'ketan@letshop.local'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(`🎉 Order Placed! Order ID: ${data.data.id}`);
+        clearCart();
+      } else {
+        toast.error(data.error || "Failed to place order");
+      }
+    } catch {
+      toast.error("Network error connecting to backend");
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -131,8 +167,12 @@ const Cart = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mb-3">
-                Proceed to Checkout
+              <Button
+                onClick={handleCheckout}
+                disabled={isCheckingOut || items.length === 0}
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mb-3"
+              >
+                {isCheckingOut ? "Placing Order..." : "Proceed to Checkout"}
               </Button>
               <Button asChild variant="outline" className="w-full border-border">
                 <Link to="/products">Continue Shopping</Link>
