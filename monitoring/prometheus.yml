@@ -1,29 +1,32 @@
-# Prometheus Configuration for LetShop Full-Stack Observability
+# ==============================================================================
+# Prometheus Configuration for LetShop Observability Stack
+# ==============================================================================
 global:
-  scrape_interval: 5s
-  evaluation_interval: 5s
+  scrape_interval: 2s
+  evaluation_interval: 2s
 
 scrape_configs:
-  # 1. LetShop Application HTTP Throughput, Latency & Error Codes
-  - job_name: 'letshop-app'
+  # 1. Scrape LetShop Application (/metrics) on host or container
+  - job_name: 'letshop-application'
     metrics_path: '/metrics'
+    scrape_interval: 2s
     static_configs:
-      - targets: ['localhost:3000', 'host.docker.internal:3000', '127.0.0.1:30080']
+      - targets: ['host.docker.internal:3000', 'localhost:3000']
         labels:
           app: 'letshop'
-          tier: 'backend-api'
-
-  # 2. Host Linux OS Metrics (CPU, RAM, Disk, Network)
-  - job_name: 'node-exporter'
-    static_configs:
-      - targets: ['localhost:9100']
-        labels:
+          tier: 'fullstack-web'
           environment: 'production'
-          role: 'aws-linux-node'
 
-  # 3. Kubernetes Pod / Container Metrics
-  - job_name: 'cadvisor'
+  # 2. Scrape Node Exporter (Host/Container OS Metrics: CPU, RAM, Disk, Net)
+  - job_name: 'node-exporter'
+    scrape_interval: 2s
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: ['node-exporter:9100', 'localhost:9100']
         labels:
-          cluster: 'letshop-k8s'
+          role: 'linux-host'
+          environment: 'production'
+
+  # 3. Scrape Prometheus internal health
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
