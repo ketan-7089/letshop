@@ -7,6 +7,7 @@ import 'dotenv/config';
 import productsRouter from './server/routes/products.js';
 import ordersRouter from './server/routes/orders.js';
 import { getDbStatus } from './server/db.js';
+import { metricsMiddleware, getMetrics, getContentType } from './server/metrics.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,8 +15,21 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Prometheus metrics tracking middleware
+app.use(metricsMiddleware);
+
 // Middleware for parsing JSON request bodies
 app.use(express.json());
+
+// Prometheus scrape endpoint for Grafana/Prometheus monitoring
+app.get('/metrics', async (req, res) => {
+  try {
+    res.set('Content-Type', getContentType());
+    res.end(await getMetrics());
+  } catch (err) {
+    res.status(500).end(err.message);
+  }
+});
 
 // Health check endpoint required by MCA Lab Manual
 app.get('/health', (req, res) => {

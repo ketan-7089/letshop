@@ -72,3 +72,12 @@ test('POST /api/orders creates a new order', withServer(async (base) => {
   assert.strictEqual(body.data.total_amount, 1798);
 }));
 
+test('GET /metrics returns Prometheus formatted metrics', withServer(async (base) => {
+  await fetch(base + '/health');
+  const res = await fetch(base + '/metrics');
+  const text = await res.text();
+  assert.strictEqual(res.status, 200);
+  assert.ok(text.includes('letshop_http_requests_total'));
+  assert.ok(text.includes('letshop_http_request_duration_seconds'));
+}));
+

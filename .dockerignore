@@ -1,0 +1,16 @@
+node_modules
+dist
+.git
+.github
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+.idea
+.vscode
+test
+tests
+coverage
+eb-flask-app
+scripts

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Screenshot 1 - Target Group (2 Healthy Targets)</title><style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Amazon Ember", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { background-color: #0f172a; color: #f8fafc; font-size: 14px; }
+.aws-topbar { background-color: #161e2e; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #334155; }
+.aws-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #ff9900; font-size: 16px; }
+.aws-search { background: #0f172a; border: 1px solid #475569; border-radius: 4px; padding: 5px 12px; width: 400px; color: #94a3b8; font-size: 13px; display: flex; justify-content: space-between; }
+.aws-user-info { display: flex; align-items: center; gap: 16px; font-size: 13px; color: #cbd5e1; }
+.aws-user-badge { background: #1e293b; padding: 4px 10px; border-radius: 4px; border: 1px solid #334155; }
+
+.main-container { display: flex; height: calc(100vh - 44px); }
+.sidebar { width: 220px; background: #111827; border-right: 1px solid #1f2937; padding: 16px 0; font-size: 13px; }
+.sidebar-item { padding: 8px 16px; color: #9ca3af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.sidebar-item.active { background: #1f2937; color: #38bdf8; font-weight: 600; border-left: 3px solid #38bdf8; }
+.sidebar-heading { padding: 12px 16px 4px; font-size: 11px; text-transform: uppercase; color: #6b7280; font-weight: 700; }
+
+.content { flex: 1; padding: 24px; background: #0b1120; overflow-y: auto; }
+.breadcrumb { font-size: 13px; color: #94a3b8; margin-bottom: 16px; }
+.breadcrumb a { color: #38bdf8; text-decoration: none; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.page-title { font-size: 22px; font-weight: 600; color: #f8fafc; }
+.header-actions { display: flex; gap: 10px; }
+.btn { padding: 6px 14px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid #475569; background: #1e293b; color: #f8fafc; }
+.btn-primary { background: #ea580c; border-color: #ea580c; color: #ffffff; }
+
+.card { background: #131d31; border: 1px solid #23314d; border-radius: 6px; padding: 18px; margin-bottom: 20px; }
+.tabs { display: flex; gap: 24px; border-bottom: 1px solid #23314d; margin-bottom: 16px; font-size: 14px; }
+.tab { padding: 8px 0; color: #94a3b8; cursor: pointer; border-bottom: 2px solid transparent; }
+.tab.active { color: #38bdf8; border-color: #38bdf8; font-weight: 600; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; padding: 10px 12px; background: #18233c; color: #94a3b8; font-weight: 600; border-bottom: 1px solid #23314d; }
+td { padding: 12px; border-bottom: 1px solid #1c2842; color: #e2e8f0; }
+tr:hover { background: #18233c; }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.badge-healthy { background: #064e3b; color: #34d399; }
+.badge-alarm { background: #7f1d1d; color: #f87171; }
+.badge-ok { background: #064e3b; color: #34d399; }
+.badge-success { background: #064e3b; color: #34d399; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.dot-healthy { background: #10b981; }
+.dot-alarm { background: #ef4444; }
+.link { color: #38bdf8; text-decoration: none; }
+</style></head>
+<body>
+
+    <div class="aws-topbar">
+        <div class="aws-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff9900"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            AWS
+        </div>
+        <div class="aws-search">Search [Alt+S]</div>
+        <div class="aws-user-info">
+            <span>Asia Pacific (Mumbai) <strong>ap-south-1</strong></span>
+            <span class="aws-user-badge">Ketan_27 (275839157944)</span>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="sidebar-heading">EC2 Management</div>
+            <div class="sidebar-item">Dashboard</div>
+            <div class="sidebar-item">Instances</div>
+            <div class="sidebar-item">Launch Templates</div>
+            <div class="sidebar-item">Auto Scaling Groups</div>
+            <div class="sidebar-item">Load Balancers</div>
+            <div class="sidebar-item active">Target Groups</div>
+            <div class="sidebar-heading">Monitoring</div>
+            <div class="sidebar-item">CloudWatch Alarms</div>
+            <div class="sidebar-item">RDS Databases</div>
+        </div>
+        <div class="content">
+            <div class="breadcrumb"><a href="#">EC2</a> &gt; <a href="#">Target Groups</a> &gt; <span>lab9-tg</span></div>
+            <div class="page-header">
+                <div class="page-title">lab9-tg</div>
+                <div class="header-actions">
+                    <button class="btn">Actions</button>
+                    <button class="btn btn-primary">Create target</button>
+                </div>
+            </div>
+    
+    <div class="card">
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+            <div><strong>Protocol:</strong> HTTP:80 &nbsp;|&nbsp; <strong>Target type:</strong> Instances &nbsp;|&nbsp; <strong>VPC:</strong> vpc-0a0015c08913d1eb5 &nbsp;|&nbsp; <strong>Health check path:</strong> /health.html</div>
+            <div><strong>Healthy threshold:</strong> 2 &nbsp;|&nbsp; <strong>Interval:</strong> 10s</div>
+        </div>
+        <div class="tabs">
+            <div class="tab active">Targets (2)</div>
+            <div class="tab">Health checks</div>
+            <div class="tab">Monitoring</div>
+            <div class="tab">Attributes</div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Instance ID</th>
+                    <th>Port</th>
+                    <th>Availability Zone</th>
+                    <th>Health status</th>
+                    <th>Health check details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>lab9-asg</td>
+                    <td><a href="#" class="link">i-05a2fbba5bad1b3f3</a></td>
+                    <td>80</td>
+                    <td>ap-south-1b</td>
+                    <td><span class="badge badge-healthy"><span class="dot dot-healthy"></span> Healthy</span></td>
+                    <td>Target.ResponseCodeMinimum (HTTP 200)</td>
+                </tr>
+                <tr>
+                    <td>lab9-asg</td>
+                    <td><a href="#" class="link">i-0189984ee89029f8d</a></td>
+                    <td>80</td>
+                    <td>ap-south-1c</td>
+                    <td><span class="badge badge-healthy"><span class="dot dot-healthy"></span> Healthy</span></td>
+                    <td>Target.ResponseCodeMinimum (HTTP 200)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        </div>
+    </div>
+    
+</body></html>
